@@ -48,6 +48,7 @@ public class ConsumerService {
                 .build();
     }
 
+
     public Long purchase(ProductDto.PurchaseRequest pr) {
         Optional<Consumer> consumer =  consumerRepository.findById(pr.getConsumerId());
         Optional<Product> product = productRepository.findById(pr.getProductId());
@@ -59,5 +60,18 @@ public class ConsumerService {
                 .consumer(consumer.get())
                 .product(product.get())
                 .build()).getId();
+    }
+
+    public ConsumerDto.GetProductResponse searchByCategory(ProductDto.SearchRequest searchRequest) {
+        List<Product> productList = new ArrayList<>();
+
+        productList = productRepository.searchByCategory(searchRequest.getKeyword());;
+        return ConsumerDto.GetProductResponse.builder()
+                .productList(productList)
+                .build();
+    }
+
+    public List<Purchase> getPurchaseInfo(ConsumerDto.PurchaseInfoRequest purchaseInfoRequest) {
+        return purchaseRepository.findByConsumerId(purchaseInfoRequest.getConsumerId());
     }
 }
