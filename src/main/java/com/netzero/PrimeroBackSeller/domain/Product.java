@@ -7,9 +7,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Product {
+@Builder
+@DynamicUpdate
+@DynamicInsert
+@NoArgsConstructor
+@AllArgsConstructor
+public class Product extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +43,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "seller_id")
     private Seller seller;
+
+    @OneToMany(mappedBy = "product")
+    List<Purchase> purchaseList = new ArrayList<>();
 }

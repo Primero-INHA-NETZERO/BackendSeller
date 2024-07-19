@@ -6,11 +6,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Builder
+@Getter
+@DynamicUpdate
+@DynamicInsert
+@NoArgsConstructor
+@AllArgsConstructor
 public class Seller {
 
     @Id
@@ -20,6 +32,6 @@ public class Seller {
 
     private String username;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "seller")
     private List<Product> productList = new ArrayList<>();
 }
