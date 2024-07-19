@@ -16,6 +16,12 @@ public class ConsumerDto {
         private String username;
     }
 
+    @Data
+    @NoArgsConstructor
+    public static class PurchaseInfoRequest {
+        private Long consumerId;
+    }
+
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor

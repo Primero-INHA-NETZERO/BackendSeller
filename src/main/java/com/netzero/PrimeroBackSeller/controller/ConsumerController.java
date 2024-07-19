@@ -35,9 +35,22 @@ public class ConsumerController {
         return BaseResponse.onSuccess(null);
     }
 
+    @PostMapping("/purchase/info")
+    public BaseResponse<?> purchaseInfo(ConsumerDto.PurchaseInfoRequest purchaseInfoRequest) {
+
+        return BaseResponse.onSuccess(consumerService.getPurchaseInfo(purchaseInfoRequest));
+    }
+
     @PostMapping("/search")
     public BaseResponse<?> search(ProductDto.SearchRequest searchRequest) {
         ConsumerDto.GetProductResponse gpr = consumerService.searchProduct(searchRequest);
+
+        return BaseResponse.onSuccess(gpr);
+    }
+
+    @PostMapping("/category")
+    public BaseResponse<?> category(@PathVariable ProductDto.SearchRequest searchRequest) {
+        ConsumerDto.GetProductResponse gpr = consumerService.searchByCategory(searchRequest);
 
         return BaseResponse.onSuccess(gpr);
     }
