@@ -1,5 +1,7 @@
 package com.netzero.PrimeroBackSeller.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,11 +24,23 @@ public class ProductDto {
         private Long salePrice;
     }
 
-    @Data
-    @NoArgsConstructor
+    @Getter
+    public static class PurchaseListRequest {
+        List<PurchaseRequest> purchaseRequestList;
+    }
+
+    @Getter
     public static class PurchaseRequest {
         private Long productId;
         private Long consumerId;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Data
+    @Builder
+    public static class PurchaseResponse {
+        List<Long> purchaseIds;
     }
 
 }

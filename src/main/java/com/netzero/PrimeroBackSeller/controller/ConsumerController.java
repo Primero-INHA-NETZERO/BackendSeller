@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,12 +28,13 @@ public class ConsumerController {
     }
 
     @PostMapping("/purchase")
-    public BaseResponse<?> purchase(List<ProductDto.PurchaseRequest> purchaseRequestList) {
-        for(ProductDto.PurchaseRequest pr: purchaseRequestList) {
-            consumerService.purchase(pr);
+    public BaseResponse<?> purchase(@RequestBody ProductDto.PurchaseListRequest purchaseRequestList) {
+        List<Long> purchaseId = new ArrayList<>();
+        for(ProductDto.PurchaseRequest pr: purchaseRequestList.getPurchaseRequestList()) {
+            purchaseId.add(consumerService.purchase(pr));
         }
 
-        return BaseResponse.onSuccess(null);
+        return BaseResponse.onSuccess(new ProductDto.PurchaseResponse(purchaseId));
     }
 
     @PostMapping("/search")

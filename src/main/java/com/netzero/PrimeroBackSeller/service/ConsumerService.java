@@ -1,5 +1,6 @@
 package com.netzero.PrimeroBackSeller.service;
 
+import com.netzero.PrimeroBackSeller.apiPayload.code.status.ErrorStatus;
 import com.netzero.PrimeroBackSeller.apiPayload.exception.GeneralException;
 import com.netzero.PrimeroBackSeller.domain.Consumer;
 import com.netzero.PrimeroBackSeller.domain.Product;
@@ -47,16 +48,16 @@ public class ConsumerService {
                 .build();
     }
 
-    public void purchase(ProductDto.PurchaseRequest pr) {
+    public Long purchase(ProductDto.PurchaseRequest pr) {
         Optional<Consumer> consumer =  consumerRepository.findById(pr.getConsumerId());
         Optional<Product> product = productRepository.findById(pr.getProductId());
         if(consumer.get() == null || product.get() == null) {
-            throw new GeneralException(null);
+            throw new GeneralException(ErrorStatus._BAD_REQUEST);
         }
 
-        purchaseRepository.save(Purchase.builder()
+        return purchaseRepository.save(Purchase.builder()
                 .consumer(consumer.get())
                 .product(product.get())
-                .build());
+                .build()).getId();
     }
 }
