@@ -1,12 +1,11 @@
 package com.netzero.PrimeroBackSeller.controller;
 
 import com.netzero.PrimeroBackSeller.apiPayload.BaseResponse;
-import com.netzero.PrimeroBackSeller.dto.ProductDTO;
-import com.netzero.PrimeroBackSeller.dto.ProductDTO.CreateProductRequest;
+
+import com.netzero.PrimeroBackSeller.dto.ProductDto;
 import com.netzero.PrimeroBackSeller.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +20,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/products")
-    public BaseResponse<Long> createProduct(@RequestBody CreateProductRequest createProductRequest) {
+    public BaseResponse<Long> createProduct(@RequestBody ProductDto.CreateProductRequest createProductRequest) {
         return BaseResponse.onSuccess(productService.createProduct(createProductRequest));
     }
 
