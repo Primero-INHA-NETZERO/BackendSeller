@@ -9,6 +9,7 @@ import com.netzero.PrimeroBackSeller.dto.ProductDto;
 import com.netzero.PrimeroBackSeller.repository.ConsumerRepository;
 import com.netzero.PrimeroBackSeller.repository.ProductRepository;
 import com.netzero.PrimeroBackSeller.repository.PurchaseRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,10 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ConsumerService {
-    private static ConsumerRepository consumerRepository;
-    private static ProductRepository productRepository;
-    private static PurchaseRepository purchaseRepository;
+    private final ConsumerRepository consumerRepository;
+    private final ProductRepository productRepository;
+    private final PurchaseRepository purchaseRepository;
 
     public void addUser(ConsumerDto.UserAddRequest userAddRequest) {
         consumerRepository.save(Consumer.builder()
