@@ -35,13 +35,5 @@ public class ProductDto {
         private Long consumerId;
     }
 
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Data
-    @Builder
-    public static class PurchaseResponse {
-        List<Long> purchaseIds;
-    }
-
 }
 

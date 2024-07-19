@@ -34,7 +34,7 @@ public class ConsumerController {
             purchaseId.add(consumerService.purchase(pr));
         }
 
-        return BaseResponse.onSuccess(new ProductDto.PurchaseResponse(purchaseId));
+        return BaseResponse.onSuccess(purchaseId);
     }
 
     @PostMapping("/search")

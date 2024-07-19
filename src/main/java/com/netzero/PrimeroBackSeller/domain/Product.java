@@ -41,7 +41,6 @@ public class Product extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
-    @JsonIgnore
     private Seller seller;
 
     @OneToMany(mappedBy = "product")

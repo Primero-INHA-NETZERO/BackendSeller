@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Override
-    List<Product> findAll();
+    @Query(value = "SELECT * FROM product", nativeQuery = true)
+    List<Product> findsAlldsf();
 
     List<Product> findByTitle(String title);
 
