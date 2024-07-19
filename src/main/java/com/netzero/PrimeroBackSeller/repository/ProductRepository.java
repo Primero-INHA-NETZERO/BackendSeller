@@ -12,6 +12,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Override
     List<Product> findAll();
 
+    List<Product> findByTitle(String title);
+
     @Query("SELECT p FROM Product p WHERE p.title LIKE %:keyword%")
     List<Product> searchByKeyword(@Param("keyword") String keyword);
 }
