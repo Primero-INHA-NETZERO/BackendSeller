@@ -34,6 +34,5 @@ public class Seller {
     private String username;
 
     @OneToMany(mappedBy = "seller")
-    @JsonIgnore
     private List<Product> productList = new ArrayList<>();
 }
