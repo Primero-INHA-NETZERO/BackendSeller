@@ -19,6 +19,7 @@ public class ConsumerDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
+    @Data
     public static class GetProductResponse {
         private List<Product> productList;
      }
