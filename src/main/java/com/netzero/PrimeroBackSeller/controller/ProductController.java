@@ -1,33 +1,33 @@
 package com.netzero.PrimeroBackSeller.controller;
 
 import com.netzero.PrimeroBackSeller.apiPayload.BaseResponse;
+import com.netzero.PrimeroBackSeller.dto.ProductDTO;
+import com.netzero.PrimeroBackSeller.dto.ProductDTO.CreateProductRequest;
 import com.netzero.PrimeroBackSeller.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1")
 public class ProductController {
 
     private final ProductService productService;
 
-    public BaseResponse<?> getProduct() {
-        return BaseResponse.onSuccess(null);
+    @PostMapping("/products")
+    public BaseResponse<Long> createProduct(@RequestBody CreateProductRequest createProductRequest) {
+        return BaseResponse.onSuccess(productService.createProduct(createProductRequest));
     }
 
-    public BaseResponse<?> getProductList() {
-        return BaseResponse.onSuccess(null);
-    }
-
-    public BaseResponse<?> createProduct() {
-        return BaseResponse.onSuccess(null);
-    }
-
-    public BaseResponse<?> updateSeller() {
-        return BaseResponse.onSuccess(null);
-    }
-
-    public BaseResponse<?> deleteProduct() {
+    @DeleteMapping("/products/{productId}")
+    public BaseResponse<?> deleteProduct(@PathVariable Long productId) {
+        productService.deleteProduct(productId);
         return BaseResponse.onSuccess(null);
     }
 }
