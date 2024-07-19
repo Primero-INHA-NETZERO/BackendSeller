@@ -18,6 +18,12 @@ public class ConsumerDto {
         private String username;
     }
 
+    @Data
+    @NoArgsConstructor
+    public static class PurchaseInfoRequest {
+        private Long consumerId;
+    }
+
     @Getter
     @Builder
     @AllArgsConstructor(access = AccessLevel.PROTECTED)

@@ -74,6 +74,7 @@ public class ConsumerService {
                 .build();
     }
 
+
     public Long purchase(ProductDto.PurchaseRequest pr) {
         Consumer consumer =  consumerRepository.findById(pr.getConsumerId()).orElseThrow(()->{
             throw new PurchaseException(ErrorStatus._BAD_REQUEST);
@@ -87,5 +88,29 @@ public class ConsumerService {
                 .consumer(consumer)
                 .product(product)
                 .build()).getId();
+    }
+
+    public ConsumerDto.GetProductResponse searchByCategory(ProductDto.SearchRequest searchRequest) {
+        List<Product> productList = new ArrayList<>();
+
+        productList = productRepository.searchByCategory(searchRequest.getKeyword());
+        List<ConsumerDto.ProductResponseDTO> productDtoList = productList.stream().map((a)->ConsumerDto.ProductResponseDTO.builder().id(
+                        a.getId())
+                .price(a.getPrice())
+                .rate(a.getRate())
+                .content(a.getContent())
+                .title(a.getTitle())
+                .imageUrl(a.getImageUrl())
+                .category(a.getCategory())
+                .viewCount(a.getViewCount())
+                .detailImageUrl(a.getDetailImageUrl())
+                .salePrice(a.getSalePrice()).build()).toList();
+        return ConsumerDto.GetProductResponse.builder()
+                .productDtoList(productDtoList)
+                .build();
+    }
+
+    public List<Purchase> getPurchaseInfo(ConsumerDto.PurchaseInfoRequest purchaseInfoRequest) {
+        return purchaseRepository.findByConsumerId(purchaseInfoRequest.getConsumerId());
     }
 }
