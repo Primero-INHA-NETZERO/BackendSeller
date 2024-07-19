@@ -34,6 +34,8 @@ public class Product extends BaseEntity {
     private String content;
     private String category;
     private Long price;
+    private Integer rate;
+    private Integer viewCount;
 
     private Long salePrice;
 
