@@ -33,6 +33,7 @@ public class Product extends BaseEntity {
     private Long id;
 
     private String imageUrl;
+    private String detailImageUrl;
 
     private String title;
 
