@@ -5,11 +5,9 @@ import com.netzero.PrimeroBackSeller.apiPayload.BaseResponse;
 import com.netzero.PrimeroBackSeller.dto.ConsumerDto;
 import com.netzero.PrimeroBackSeller.dto.ProductDto;
 import com.netzero.PrimeroBackSeller.service.ConsumerService;
+import com.netzero.PrimeroBackSeller.service.ProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,4 +33,15 @@ public class ConsumerController {
         return BaseResponse.onSuccess(null);
     }
 
+    @PostMapping("/search")
+    public BaseResponse<?> search(ProductDto.SearchRequest searchRequest) {
+        ConsumerDto.GetProductResponse gpr = consumerService.searchProduct(searchRequest);
+
+        return BaseResponse.onSuccess(gpr);
+    }
+
+    @GetMapping("/product/all")
+    public BaseResponse<?> getProduct() {
+        return BaseResponse.onSuccess(consumerService.getProduct());
+    }
 }
