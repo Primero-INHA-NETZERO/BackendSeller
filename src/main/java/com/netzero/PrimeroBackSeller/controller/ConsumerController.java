@@ -6,6 +6,7 @@ import com.netzero.PrimeroBackSeller.dto.ConsumerDto;
 import com.netzero.PrimeroBackSeller.dto.ProductDto;
 import com.netzero.PrimeroBackSeller.service.ConsumerService;
 import com.netzero.PrimeroBackSeller.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/consumer")
+@RequiredArgsConstructor
 public class ConsumerController {
 
-    private static ConsumerService consumerService;
+    private final ConsumerService consumerService;
 
     @PostMapping("/add")
     public BaseResponse<?> addConsumer(@RequestBody ConsumerDto.UserAddRequest userAddRequest) {
