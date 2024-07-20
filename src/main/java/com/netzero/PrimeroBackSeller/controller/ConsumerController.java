@@ -2,6 +2,7 @@ package com.netzero.PrimeroBackSeller.controller;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.netzero.PrimeroBackSeller.apiPayload.BaseResponse;
+import com.netzero.PrimeroBackSeller.domain.Purchase;
 import com.netzero.PrimeroBackSeller.dto.ConsumerDto;
 import com.netzero.PrimeroBackSeller.dto.ProductDto;
 import com.netzero.PrimeroBackSeller.service.ConsumerService;
@@ -38,9 +39,9 @@ public class ConsumerController {
     }
 
     @PostMapping("/purchase/info")
-    public BaseResponse<?> purchaseInfo(ConsumerDto.PurchaseInfoRequest purchaseInfoRequest) {
-
-        return BaseResponse.onSuccess(consumerService.getPurchaseInfo(purchaseInfoRequest));
+    public BaseResponse<?> purchaseInfo(@RequestBody ConsumerDto.PurchaseInfoRequest purchaseInfoRequest) {
+        List<Purchase> purchaseList = consumerService.getPurchaseInfo(purchaseInfoRequest);
+        return BaseResponse.onSuccess(purchaseListck;
     }
 
     @PostMapping("/search")
