@@ -17,6 +17,9 @@ public enum ErrorStatus implements BaseErrorCode {
     _FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON403", "금지된 요청입니다."),
 
     _NOT_FOUND_SELLER(HttpStatus.BAD_REQUEST, "SELLER401", "SELLER가 존재하지 않습니다"),
+    // S3 관련
+    S3_OBJECT_NOT_FOUND(HttpStatus.NOT_FOUND, "S3_001", "S3 오브젝트를 찾을 수 없습니다."),
+    S3_UPLOAD_FAIL(HttpStatus.INTERNAL_SERVER_ERROR, "S3_002", "S3 업로드 실패"),
     _NOT_FOUND_PRODUCT(HttpStatus.BAD_REQUEST, "PRODUCT401", "PRODUCT가 존재하지 않습니다");
 
     private final HttpStatus httpStatus;
