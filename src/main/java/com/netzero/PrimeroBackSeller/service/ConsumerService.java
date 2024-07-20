@@ -111,6 +111,7 @@ public class ConsumerService {
     }
 
     public List<Purchase> getPurchaseInfo(ConsumerDto.PurchaseInfoRequest purchaseInfoRequest) {
-        return purchaseRepository.findByConsumerId(purchaseInfoRequest.getConsumerId());
+        Consumer consumer = consumerRepository.findById(purchaseInfoRequest.getConsumerId()).orElseThrow(()-> new ConsumerException(ErrorStatus._BAD_REQUEST));
+        return consumer.getPurchaseList();
     }
 }

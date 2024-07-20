@@ -18,8 +18,7 @@ public class ConsumerDto {
         private String username;
     }
 
-    @Data
-    @NoArgsConstructor
+    @Getter
     public static class PurchaseInfoRequest {
         private Long consumerId;
     }
@@ -52,5 +51,21 @@ public class ConsumerDto {
 
         private Long salePrice;
      }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor(access = AccessLevel.PROTECTED)
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class GetPurchaseResponse {
+        private List<PurchaseInfo> productDtoList;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor(access = AccessLevel.PROTECTED)
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    public static class PurchaseInfo {
+        private Long id;
+    }
 
 }

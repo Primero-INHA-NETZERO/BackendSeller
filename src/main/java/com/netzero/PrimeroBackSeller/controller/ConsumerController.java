@@ -41,7 +41,14 @@ public class ConsumerController {
     @PostMapping("/purchase/info")
     public BaseResponse<?> purchaseInfo(@RequestBody ConsumerDto.PurchaseInfoRequest purchaseInfoRequest) {
         List<Purchase> purchaseList = consumerService.getPurchaseInfo(purchaseInfoRequest);
-        return BaseResponse.onSuccess(purchaseList);
+
+        List<ConsumerDto.PurchaseInfo> purchaseInfo = purchaseList.stream().map((a)->{
+            return ConsumerDto.PurchaseInfo.builder()
+                    .id(a.getId())
+                    .build();
+        }).toList();
+
+        return BaseResponse.onSuccess(ConsumerDto.GetPurchaseResponse.builder().productDtoList(purchaseInfo).build());
     }
 
     @PostMapping("/search")
