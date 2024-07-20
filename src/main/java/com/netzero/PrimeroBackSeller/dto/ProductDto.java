@@ -16,15 +16,6 @@ public class ProductDto {
     }
 
     @Getter
-    public static class CreateProductRequest {
-        private Long sellerId;
-        private String content;
-        private String title;
-        private Long price;
-        private Long salePrice;
-    }
-
-    @Getter
     public static class PurchaseListRequest {
         List<PurchaseRequest> purchaseRequestList;
     }

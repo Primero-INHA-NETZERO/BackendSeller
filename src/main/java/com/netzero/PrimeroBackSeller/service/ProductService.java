@@ -22,7 +22,7 @@ public class ProductService {
     private final SellerRepository sellerRepository;
     private final AmazonS3Manager s3Manager;
 
-    public Long createProduct(ProductDto.CreateProductRequest createProductRequest, MultipartFile thumbnatil, MultipartFile detail) {
+    public Long createProduct(Long sellerId, String title, String content, Long price, Long salePrice, MultipartFile thumbnatil, MultipartFile detail) {
         String thumbnailImageUrl = null;
         if (thumbnatil != null) {
             thumbnailImageUrl = s3Manager.uploadRecreationThumbnailImage(thumbnatil);
@@ -32,13 +32,13 @@ public class ProductService {
             detailUrl = s3Manager.uploadRecreationThumbnailImage(detail);
         }
 
-        Seller seller = sellerRepository.findById(createProductRequest.getSellerId()).orElseThrow(()-> new GeneralException(ErrorStatus._NOT_FOUND_SELLER));
+        Seller seller = sellerRepository.findById(sellerId).orElseThrow(()-> new GeneralException(ErrorStatus._NOT_FOUND_SELLER));
         Product product = Product.builder()
-                .content(createProductRequest.getContent())
+                .content(content)
                 .seller(seller)
-                .title(createProductRequest.getTitle())
-                .price(createProductRequest.getPrice())
-                .salePrice(createProductRequest.getSalePrice())
+                .title(title)
+                .price(price)
+                .salePrice(salePrice)
                 .imageUrl(thumbnailImageUrl)
                 .detailImageUrl(detailUrl)
                 .build();
