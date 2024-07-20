@@ -41,7 +41,7 @@ public class ConsumerController {
     @PostMapping("/purchase/info")
     public BaseResponse<?> purchaseInfo(@RequestBody ConsumerDto.PurchaseInfoRequest purchaseInfoRequest) {
         List<Purchase> purchaseList = consumerService.getPurchaseInfo(purchaseInfoRequest);
-        return BaseResponse.onSuccess(purchaseListck;
+        return BaseResponse.onSuccess(purchaseList);
     }
 
     @PostMapping("/search")
